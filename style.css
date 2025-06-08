@@ -36,25 +36,268 @@ body {
   text-align: center;
 }
 
-.main-illustration {
-  max-width: 100%;
-  height: auto;
+/* CSS イラスト共通スタイル */
+.css-illustration {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  height: 300px;
+  margin: 0 auto 20px;
+  background-color: #e8f8e8;
   border-radius: 20px;
   box-shadow: 0 5px 15px rgba(248, 165, 194, 0.2);
-  margin-bottom: 20px;
-}
-
-.result-illustration {
-  max-width: 100%;
-  height: auto;
-  border-radius: 15px;
-  box-shadow: 0 3px 10px rgba(248, 165, 194, 0.15);
-  margin: 15px 0;
+  overflow: hidden;
   transition: transform 0.3s ease;
 }
 
-.result-illustration:hover {
+.css-illustration:hover {
   transform: scale(1.03);
+}
+
+.css-illustration.personality-illustration,
+.css-illustration.career-illustration {
+  max-width: 300px;
+  height: 200px;
+  margin: 15px auto;
+  box-shadow: 0 3px 10px rgba(248, 165, 194, 0.15);
+}
+
+/* 人物の共通スタイル */
+.person {
+  position: absolute;
+  width: 100px;
+  height: 200px;
+}
+
+.main-illustration .person-1 {
+  left: 80px;
+  top: 50px;
+}
+
+.main-illustration .person-2 {
+  left: 220px;
+  top: 60px;
+}
+
+.personality-illustration .person,
+.career-illustration .person {
+  left: 50%;
+  top: 30px;
+  transform: translateX(-50%);
+}
+
+/* 頭部のスタイル */
+.head {
+  position: relative;
+  width: 60px;
+  height: 70px;
+  margin: 0 auto;
+}
+
+.hair {
+  position: absolute;
+  width: 60px;
+  height: 70px;
+  border: 2px solid #333;
+  border-radius: 30px 30px 0 0;
+  background-color: transparent;
+}
+
+.person-1 .hair {
+  height: 80px;
+  border-radius: 30px 30px 20px 20px;
+}
+
+.face {
+  position: absolute;
+  width: 50px;
+  height: 60px;
+  top: 10px;
+  left: 5px;
+  border: 2px solid #333;
+  border-radius: 25px 25px 20px 20px;
+  background-color: #fff;
+}
+
+.eyes {
+  position: absolute;
+  width: 30px;
+  height: 6px;
+  top: 30px;
+  left: 15px;
+}
+
+.eyes:before,
+.eyes:after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: #333;
+}
+
+.eyes:before {
+  left: 0;
+}
+
+.eyes:after {
+  right: 0;
+}
+
+.glasses {
+  position: absolute;
+  width: 40px;
+  height: 15px;
+  top: 28px;
+  left: 10px;
+  border: 2px solid #333;
+  border-radius: 10px;
+}
+
+.mouth {
+  position: absolute;
+  width: 10px;
+  height: 3px;
+  top: 45px;
+  left: 25px;
+  background-color: #333;
+}
+
+.mouth.smile {
+  width: 14px;
+  height: 7px;
+  border-radius: 0 0 7px 7px;
+  border: 2px solid #333;
+  border-top: none;
+  background-color: transparent;
+}
+
+/* 体のスタイル */
+.body {
+  position: relative;
+  width: 70px;
+  height: 100px;
+  margin: 0 auto;
+}
+
+.top {
+  position: absolute;
+  width: 70px;
+  height: 60px;
+  top: 0;
+  left: 0;
+  border: 2px solid #333;
+  border-radius: 10px;
+}
+
+.person-1 .top {
+  background-color: #ffeb3b;
+}
+
+.person-2 .top {
+  background-color: #fff;
+}
+
+.bottom {
+  position: absolute;
+  width: 70px;
+  height: 40px;
+  top: 60px;
+  left: 0;
+  border: 2px solid #333;
+}
+
+.person-2 .bottom {
+  background-color: #333;
+}
+
+/* ラップトップのスタイル */
+.laptop {
+  position: absolute;
+  width: 120px;
+  height: 80px;
+  bottom: 70px;
+  left: 140px;
+  border: 2px solid #333;
+  background-color: #f5f5f5;
+  transform: perspective(500px) rotateX(45deg);
+}
+
+.laptop:after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 10px;
+  bottom: -10px;
+  left: 0;
+  background-color: #333;
+  border-radius: 0 0 5px 5px;
+}
+
+/* 性格タイプアイコン */
+.personality-icons {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-around;
+}
+
+.icon {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #333;
+  border-radius: 50%;
+}
+
+.icon-1 {
+  background-color: #ffeb3b;
+}
+
+.icon-2 {
+  background-color: #f8a5c2;
+}
+
+.icon-3 {
+  background-color: #7bed9f;
+}
+
+/* 職業アイテム */
+.career-items {
+  position: absolute;
+  width: 200px;
+  height: 50px;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  justify-content: space-around;
+}
+
+.item {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #333;
+}
+
+.item-1 {
+  border-radius: 5px;
+  background-color: #f8a5c2;
+}
+
+.item-2 {
+  border-radius: 50%;
+  background-color: #7bed9f;
+}
+
+.item-3 {
+  border-radius: 0;
+  background-color: #ffeb3b;
+  transform: rotate(45deg);
 }
 
 .hidden {
