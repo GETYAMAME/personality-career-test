@@ -1,0 +1,21 @@
+{
+  "name": "personality-career-test",
+  "version": "1.0.0",
+  "description": "性格診断＋適職診断アプリケーション",
+  "main": "index.html",
+  "scripts": {
+    "start": "serve",
+    "build": "echo 'No build step required'"
+  },
+  "keywords": [
+    "personality",
+    "career",
+    "test",
+    "診断"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.0.0"
+  }
+}
