@@ -1,0 +1,348 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Hiragino Kaku Gothic Pro", "Meiryo", sans-serif;
+}
+
+body {
+  background-color: #f5f5f5;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.screen {
+  text-align: center;
+  padding: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+h2 {
+  font-size: 2rem;
+  color: #2c3e50;
+  margin-bottom: 20px;
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: #2c3e50;
+  margin-bottom: 15px;
+}
+
+p {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+}
+
+.btn {
+  background-color: #3498db;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 20px;
+}
+
+.btn:hover {
+  background-color: #2980b9;
+}
+
+.btn:disabled {
+  background-color: #95a5a6;
+  cursor: not-allowed;
+}
+
+/* 登録フォーム */
+.form-group {
+  margin-bottom: 15px;
+  text-align: left;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+}
+
+.note {
+  font-size: 0.9rem;
+  color: #7f8c8d;
+  margin-top: 10px;
+}
+
+/* LINE友だち追加ボタン */
+.line-container {
+  margin: 25px auto;
+  text-align: center;
+  max-width: 400px;
+}
+
+.line-button-container {
+  margin-top: 15px;
+  background-color: #f8f9fa;
+  padding: 15px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.line-add-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.2s;
+}
+
+.line-add-btn:hover {
+  transform: scale(1.05);
+}
+
+.line-note {
+  font-size: 0.9rem;
+  color: #06c755;
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+/* 質問画面 */
+.progress-container {
+  width: 100%;
+  height: 10px;
+  background-color: #ecf0f1;
+  border-radius: 5px;
+  margin-bottom: 30px;
+}
+
+.progress-bar {
+  height: 100%;
+  background-color: #2ecc71;
+  border-radius: 5px;
+  width: 0%;
+  transition: width 0.3s ease;
+}
+
+#question-number {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #16a085;
+  margin-bottom: 15px;
+}
+
+#question-text {
+  font-size: 1.3rem;
+  margin-bottom: 30px;
+  line-height: 1.8;
+}
+
+.options-container {
+  margin: 30px 0;
+}
+
+.options-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  max-width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.options-labels span {
+  font-weight: bold;
+  color: #555;
+}
+
+.options {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px;
+}
+
+.option {
+  position: relative;
+  cursor: pointer;
+}
+
+.option input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.radio-btn {
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 2px solid #bdc3c7;
+  background-color: white;
+  transition: all 0.3s ease;
+}
+
+.option:nth-child(1) .radio-btn,
+.option:nth-child(2) .radio-btn {
+  border-color: #27ae60;
+}
+
+.option:nth-child(4) .radio-btn,
+.option:nth-child(5) .radio-btn {
+  border-color: #8e44ad;
+}
+
+.option input:checked + .radio-btn {
+  background-color: #3498db;
+  border-color: #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.5);
+}
+
+.option:nth-child(1) input:checked + .radio-btn {
+  background-color: #27ae60;
+  border-color: #27ae60;
+  box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+}
+
+.option:nth-child(2) input:checked + .radio-btn {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+}
+
+.option:nth-child(4) input:checked + .radio-btn {
+  background-color: #9b59b6;
+  border-color: #9b59b6;
+  box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
+}
+
+.option:nth-child(5) input:checked + .radio-btn {
+  background-color: #8e44ad;
+  border-color: #8e44ad;
+  box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
+}
+
+/* ローディング画面 */
+.loader {
+  border: 8px solid #f3f3f3;
+  border-top: 8px solid #3498db;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  animation: spin 2s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* 結果画面 */
+.result-container {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  margin: 20px 0;
+}
+
+.personality-result,
+.career-result {
+  background-color: #f8f9fa;
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.result-box {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #2c3e50;
+  margin: 15px 0;
+  padding: 10px;
+  background-color: #e8f4fc;
+  border-radius: 5px;
+}
+
+#personality-description,
+#career-description {
+  text-align: left;
+  line-height: 1.8;
+}
+
+/* レスポンシブデザイン */
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+  }
+
+  .radio-btn {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .radio-btn {
+    width: 30px;
+    height: 30px;
+  }
+
+  .options-labels {
+    font-size: 0.9rem;
+  }
+
+  #question-text {
+    font-size: 1.1rem;
+  }
+}

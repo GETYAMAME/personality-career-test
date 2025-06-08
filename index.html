@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>性格・適職診断テスト</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="container">
+      <div id="start-screen" class="screen">
+        <h1>性格・適職診断テスト</h1>
+        <p>
+          あなたの性格と最適な職業を診断します。<br />質問に答えて、自分自身をより深く理解しましょう。
+        </p>
+        <button id="start-btn" class="btn">診断を始める</button>
+      </div>
+
+      <div id="registration-screen" class="screen hidden">
+        <h2>診断が完了しました</h2>
+        <p>診断結果を受け取るために、以下のいずれかを選択してください。</p>
+        <form id="registration-form">
+          <div class="form-group">
+            <label for="email">メールアドレス</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="例: example@mail.com"
+            />
+          </div>
+          <div class="line-container">
+            <p>または</p>
+            <div class="line-button-container">
+              <button type="button" id="line-add-button" class="line-add-btn">
+                <img
+                  src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png"
+                  alt="友だち追加"
+                  height="36"
+                />
+              </button>
+              <p class="line-note">LINEで友だち追加して結果を受け取る</p>
+            </div>
+          </div>
+          <button type="submit" class="btn">次へ進む</button>
+        </form>
+      </div>
+
+      <div id="question-screen" class="screen hidden">
+        <div class="progress-container">
+          <div id="progress-bar" class="progress-bar"></div>
+        </div>
+        <div id="question-number">Q1</div>
+        <div id="question-text">質問テキストがここに表示されます</div>
+
+        <div class="options-container">
+          <div class="options-labels">
+            <span>賛成する</span>
+            <span>反対する</span>
+          </div>
+          <div class="options">
+            <label class="option">
+              <input type="radio" name="answer" value="5" />
+              <span class="radio-btn"></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="4" />
+              <span class="radio-btn"></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="3" />
+              <span class="radio-btn"></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="2" />
+              <span class="radio-btn"></span>
+            </label>
+            <label class="option">
+              <input type="radio" name="answer" value="1" />
+              <span class="radio-btn"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="question-buttons">
+          <button id="prev-btn" class="btn hidden">戻る</button>
+        </div>
+      </div>
+
+      <div id="loading-screen" class="screen hidden">
+        <div class="loader"></div>
+        <p>診断結果を分析中...</p>
+      </div>
+
+      <div id="result-screen" class="screen hidden">
+        <h2>診断結果</h2>
+        <div class="result-container">
+          <div class="personality-result">
+            <h3>あなたの性格タイプ</h3>
+            <div id="personality-type" class="result-box"></div>
+            <div id="personality-description"></div>
+          </div>
+          <div class="career-result">
+            <h3>あなたに適した職業</h3>
+            <div id="career-matches" class="result-box"></div>
+            <div id="career-description"></div>
+          </div>
+        </div>
+        <button id="restart-btn" class="btn">もう一度診断する</button>
+      </div>
+    </div>
+
+    <script src="questions.js"></script>
+    <script src="results.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script>
+      (function () {
+        // EmailJSの初期化（実際のユーザーIDに置き換えてください）
+        emailjs.init("YOUR_USER_ID");
+      })();
+    </script>
+    <script src="script.js"></script>
+    <script src="https://static.line-scdn.net/liff/edge/2/sdk.js"></script>
+  </body>
+</html>
