@@ -220,12 +220,12 @@ input {
 
 .option:nth-child(1) .radio-btn,
 .option:nth-child(2) .radio-btn {
-  border-color: #27ae60;
+  border-color: #8e44ad;
 }
 
 .option:nth-child(4) .radio-btn,
 .option:nth-child(5) .radio-btn {
-  border-color: #8e44ad;
+  border-color: #27ae60;
 }
 
 .option input:checked + .radio-btn {
@@ -235,27 +235,27 @@ input {
 }
 
 .option:nth-child(1) input:checked + .radio-btn {
-  background-color: #27ae60;
-  border-color: #27ae60;
-  box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
+  background-color: #8e44ad;
+  border-color: #8e44ad;
+  box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
 }
 
 .option:nth-child(2) input:checked + .radio-btn {
-  background-color: #2ecc71;
-  border-color: #2ecc71;
-  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
-}
-
-.option:nth-child(4) input:checked + .radio-btn {
   background-color: #9b59b6;
   border-color: #9b59b6;
   box-shadow: 0 0 10px rgba(155, 89, 182, 0.5);
 }
 
+.option:nth-child(4) input:checked + .radio-btn {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+}
+
 .option:nth-child(5) input:checked + .radio-btn {
-  background-color: #8e44ad;
-  border-color: #8e44ad;
-  box-shadow: 0 0 10px rgba(142, 68, 173, 0.5);
+  background-color: #27ae60;
+  border-color: #27ae60;
+  box-shadow: 0 0 10px rgba(39, 174, 96, 0.5);
 }
 
 /* ローディング画面 */
