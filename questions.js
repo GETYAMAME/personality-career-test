@@ -225,4 +225,104 @@ const careerCategories = {
       "ホスピタリティスタッフ",
     ],
   },
+  education: {
+    name: "教育・指導系",
+    description:
+      "知識や技術を伝え、人の成長をサポートする仕事です✨ 相手の可能性を引き出し、学びの喜びを共有することができます。",
+    personalities: [
+      "empathetic_collaborator",
+      "analytical_leader",
+      "detail_oriented_specialist",
+    ],
+    jobs: [
+      "講師・教員",
+      "オンライン講師",
+      "教育コンテンツクリエイター",
+      "学習コーチ",
+      "キャリアカウンセラー",
+      "語学講師",
+      "プログラミング講師",
+      "ワークショップファシリテーター",
+    ],
+  },
+  healthcare: {
+    name: "医療・健康系",
+    description:
+      "人々の健康と幸福をサポートする仕事です✨ 専門知識と思いやりで、心と体の健康維持に貢献できます。",
+    personalities: [
+      "detail_oriented_specialist",
+      "empathetic_collaborator",
+      "analytical_leader",
+    ],
+    jobs: [
+      "看護師",
+      "理学療法士",
+      "健康管理アドバイザー",
+      "メンタルヘルスカウンセラー",
+      "ヨガインストラクター",
+      "アロマセラピスト",
+      "栄養コンサルタント",
+      "ウェルネスコーチ",
+    ],
+  },
+  media: {
+    name: "メディア・コミュニケーション系",
+    description:
+      "情報を伝え、人々をつなぐ仕事です✨ 言葉や映像の力で、社会に新しい視点や価値観を提供します。",
+    personalities: [
+      "creative_innovator",
+      "analytical_leader",
+      "adaptable_problem_solver",
+    ],
+    jobs: [
+      "ライター・編集者",
+      "YouTuber・動画クリエイター",
+      "ポッドキャスター",
+      "SNSマネージャー",
+      "広報・PRスペシャリスト",
+      "メディアプランナー",
+      "コミュニティマネージャー",
+      "インフルエンサーマーケター",
+    ],
+  },
+  art_culture: {
+    name: "アート・カルチャー系",
+    description:
+      "文化や芸術を通じて、人々に感動や新しい体験を提供する仕事です✨ 創造性と感性で、社会に彩りを加えます。",
+    personalities: [
+      "creative_innovator",
+      "empathetic_collaborator",
+      "detail_oriented_specialist",
+    ],
+    jobs: [
+      "ギャラリスト",
+      "ミュージアムスタッフ",
+      "アートディレクター",
+      "文化イベントプランナー",
+      "工芸作家",
+      "アートセラピスト",
+      "舞台芸術関連職",
+      "伝統文化継承者",
+    ],
+  },
+  sustainability: {
+    name: "環境・サステナビリティ系",
+    description:
+      "地球環境や社会の持続可能性に貢献する仕事です✨ 未来を見据えた視点で、より良い社会づくりに関わることができます。",
+    personalities: [
+      "analytical_leader",
+      "creative_innovator",
+      "empathetic_collaborator",
+    ],
+    jobs: [
+      "環境コンサルタント",
+      "SDGs推進担当",
+      "エシカルブランドマネージャー",
+      "サステナビリティ教育者",
+      "環境NPOスタッフ",
+      "グリーンプロダクト開発者",
+      "フェアトレードコーディネーター",
+      "リサイクル・アップサイクル事業者",
+    ],
+  },
 };

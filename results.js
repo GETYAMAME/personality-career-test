@@ -79,7 +79,25 @@ const determineCareerCategories = (personalityType) => {
     }
   });
 
-  // マッチ度の高い順にソート（将来的な拡張のため）
+  // マッチするカテゴリーがない場合は、すべてのカテゴリーから選択
+  if (matchingCategories.length === 0) {
+    Object.keys(careerCategories).forEach((categoryKey) => {
+      matchingCategories.push({
+        key: categoryKey,
+        ...careerCategories[categoryKey],
+      });
+    });
+  }
+
+  // カテゴリーをランダムに並び替え
+  for (let i = matchingCategories.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [matchingCategories[i], matchingCategories[j]] = [
+      matchingCategories[j],
+      matchingCategories[i],
+    ];
+  }
+
   return matchingCategories;
 };
 
