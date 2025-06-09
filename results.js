@@ -111,6 +111,14 @@ const displayResults = (results) => {
   document.getElementById("personality-description").textContent =
     results.personalityData.description;
 
+  // 性格タイプに応じた画像を表示
+  const personalityImage = document.querySelector(
+    ".personality-result .result-illustration"
+  );
+  const personalityType = results.personalityType;
+  personalityImage.src = `images/${personalityType}.png`;
+  personalityImage.alt = `${results.personalityData.name}のイラスト`;
+
   // 適職の表示
   const careerMatchesElement = document.getElementById("career-matches");
   careerMatchesElement.innerHTML = "";
@@ -119,6 +127,13 @@ const displayResults = (results) => {
     // 最もマッチする職業カテゴリーを表示
     const topCategory = results.careerCategories[0];
     careerMatchesElement.textContent = topCategory.name;
+
+    // 職業カテゴリーに応じた画像を表示
+    const careerImage = document.querySelector(
+      ".career-result .result-illustration"
+    );
+    careerImage.src = `images/${topCategory.key}.png`;
+    careerImage.alt = `${topCategory.name}のイラスト`;
 
     // 職業の詳細説明
     let careerDescription = `${topCategory.description}<br><br>`;
