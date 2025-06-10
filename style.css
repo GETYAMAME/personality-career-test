@@ -108,7 +108,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid #ffecef;
+  border: none;
   margin-bottom: 30px;
 }
 
