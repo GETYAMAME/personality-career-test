@@ -261,14 +261,8 @@ const generateResultUrl = (results) => {
 // メールで診断結果を送信する
 const sendResultsByEmail = (email, results) => {
   try {
-    console.log("メール送信処理を開始します...");
-    console.log("EmailJS情報 - ユーザーID:", "C2SQsPrfRcTmuDxwY");
-    console.log("EmailJS情報 - サービスID:", "service_geb6xap");
-    console.log("EmailJS情報 - テンプレートID:", "template_x2a74sv");
-
     // EmailJSの初期化を確認
     if (typeof emailjs === "undefined") {
-      console.error("EmailJSが読み込まれていません");
       alert(
         "メール送信機能が正しく初期化されていません。ページを再読み込みしてください。"
       );
@@ -277,11 +271,9 @@ const sendResultsByEmail = (email, results) => {
 
     // EmailJSの初期化（公開キーを設定）
     emailjs.init("C2SQsPrfRcTmuDxwY");
-    console.log("EmailJSを初期化しました");
 
     // 結果URLを生成（ローカルストレージを使わない）
     const resultUrl = generateResultUrl(results);
-    console.log("生成されたURL:", resultUrl);
 
     // 診断結果のテキストを作成（短く保つ）
     const personalityType = results.personalityData.name;
@@ -303,23 +295,13 @@ const sendResultsByEmail = (email, results) => {
       result_url: resultUrl,
     };
 
-    console.log("送信するパラメータ:", JSON.stringify(templateParams, null, 2));
-
     // 直接シンプルなパラメータで送信
     emailjs
       .send("service_geb6xap", "template_x2a74sv", templateParams)
-      .then((response) => {
-        console.log("メール送信成功:", response);
+      .then(() => {
         alert("診断結果をメールで送信しました！");
       })
-      .catch((error) => {
-        console.error("メール送信エラー:", error);
-
-        // エラーの詳細情報を表示
-        if (error.text) {
-          console.error("エラー詳細:", error.text);
-        }
-
+      .catch(() => {
         alert("メール送信中にエラーが発生しました。もう一度お試しください。");
 
         // 代替手段として結果URLをクリップボードにコピー
@@ -330,12 +312,11 @@ const sendResultsByEmail = (email, results) => {
               "結果URLをクリップボードにコピーしました。必要に応じて保存してください。"
             );
           })
-          .catch((err) => {
-            console.error("クリップボードへのコピーに失敗しました:", err);
+          .catch(() => {
+            // エラー処理は行わない
           });
       });
   } catch (error) {
-    console.error("メール送信処理でエラーが発生しました:", error);
     alert("メール送信処理でエラーが発生しました。もう一度お試しください。");
   }
 };
