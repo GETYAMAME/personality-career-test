@@ -356,25 +356,30 @@ input {
   transition: all 0.3s ease;
 }
 
-/* 端に行くほど大きくなるラジオボタン */
+/* 端に行くほど大きくなるラジオボタン（より極端に） */
 .option:nth-child(1) .radio-btn {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
 }
 
 .option:nth-child(2) .radio-btn {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
+}
+
+.option:nth-child(3) .radio-btn {
+  width: 35px;
+  height: 35px;
 }
 
 .option:nth-child(4) .radio-btn {
-  width: 45px;
-  height: 45px;
+  width: 50px;
+  height: 50px;
 }
 
 .option:nth-child(5) .radio-btn {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
 }
 
 .option:nth-child(1) .radio-btn,
@@ -572,25 +577,30 @@ input {
     max-width: 100%;
   }
 
-  /* レスポンシブ対応：端に行くほど大きくなるラジオボタン */
+  /* レスポンシブ対応：端に行くほど大きくなるラジオボタン（より極端に） */
   .option:nth-child(1) .radio-btn {
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
   }
 
   .option:nth-child(2) .radio-btn {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
+  }
+
+  .option:nth-child(3) .radio-btn {
+    width: 30px;
+    height: 30px;
   }
 
   .option:nth-child(4) .radio-btn {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
   }
 
   .option:nth-child(5) .radio-btn {
-    width: 40px;
-    height: 40px;
+    width: 55px;
+    height: 55px;
   }
 
   .options-labels {
