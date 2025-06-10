@@ -263,9 +263,7 @@ const sendResultsByEmail = (email, results) => {
   try {
     // EmailJSの初期化を確認
     if (typeof emailjs === "undefined") {
-      alert(
-        "メール送信機能が正しく初期化されていません。ページを再読み込みしてください。"
-      );
+      console.error("メール送信機能が正しく初期化されていません。");
       return;
     }
 
@@ -299,25 +297,23 @@ const sendResultsByEmail = (email, results) => {
     emailjs
       .send("service_geb6xap", "template_x2a74sv", templateParams)
       .then(() => {
-        alert("診断結果をメールで送信しました！");
+        console.log("診断結果をメールで送信しました");
       })
-      .catch(() => {
-        alert("メール送信中にエラーが発生しました。もう一度お試しください。");
+      .catch((error) => {
+        console.error("メール送信エラー:", error);
 
         // 代替手段として結果URLをクリップボードにコピー
         navigator.clipboard
           .writeText(resultUrl)
           .then(() => {
-            alert(
-              "結果URLをクリップボードにコピーしました。必要に応じて保存してください。"
-            );
+            console.log("結果URLをクリップボードにコピーしました");
           })
-          .catch(() => {
-            // エラー処理は行わない
+          .catch((error) => {
+            console.error("クリップボードコピーエラー:", error);
           });
       });
   } catch (error) {
-    alert("メール送信処理でエラーが発生しました。もう一度お試しください。");
+    console.error("メール送信処理でエラー:", error);
   }
 };
 

@@ -541,10 +541,15 @@ input {
 
   h1 {
     font-size: 2rem;
+    margin-bottom: 10px;
   }
 
   h2 {
     font-size: 1.7rem;
+  }
+
+  p {
+    margin-bottom: 15px;
   }
 
   .radio-btn {
@@ -554,15 +559,39 @@ input {
 
   /* スマートフォン表示時の画像サイズ調整 */
   .main-illustration {
-    max-width: 80%;
+    max-width: 60%;
+    margin-bottom: 10px;
   }
 
   .result-illustration {
     max-width: 80%;
   }
+
+  /* スマホ表示時のスタート画面調整 */
+  #start-screen {
+    padding: 10px 5px;
+  }
+
+  .illustration-container {
+    margin: 10px auto;
+  }
+
+  /* スマホ表示時のボタン調整 */
+  #start-btn {
+    margin-top: 10px;
+  }
 }
 
 @media (max-width: 480px) {
+  .site-header {
+    padding: 8px 0;
+    margin-bottom: 10px;
+  }
+
+  .site-title {
+    font-size: 1.4rem;
+  }
+
   .radio-btn {
     width: 30px;
     height: 30px;
@@ -570,7 +599,8 @@ input {
 
   /* 小さいスマートフォン表示時の画像サイズ調整 */
   .main-illustration {
-    max-width: 100%;
+    max-width: 40%;
+    margin-bottom: 5px;
   }
 
   .result-illustration {
@@ -609,5 +639,29 @@ input {
 
   #question-text {
     font-size: 1.1rem;
+  }
+
+  /* スマホ表示時のスタート画面調整 */
+  #start-screen {
+    padding: 5px;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+    margin-top: 5px;
+    margin-bottom: 5px;
+  }
+
+  p {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+
+  /* スマホ表示時のボタン調整 */
+  #start-btn {
+    margin-top: 5px;
+    padding: 12px 25px;
+    width: 90%;
+    max-width: 300px;
   }
 }
