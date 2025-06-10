@@ -264,9 +264,8 @@ const sendResultsByEmail = (email, results) => {
   };
 
   // EmailJSを使用してメール送信
-  // 実際のサービスIDとテンプレートIDに置き換えてください
   emailjs
-    .send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", templateParams)
+    .send("service_geb6xap", "template_x2a74sv", templateParams)
     .then((response) => {
       console.log("メール送信成功:", response);
     })
