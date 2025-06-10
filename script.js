@@ -253,7 +253,8 @@ const generateResultUrl = (results) => {
   const careerCategory = results.careerCategories[0].key; // careerCategoriesの最初の要素のkey
 
   // URLパラメータに必要最小限の情報を含める
-  const baseUrl = window.location.href.split("?")[0];
+  // ローカル環境の場合はVercelのURLを使用
+  const baseUrl = "https://personality-career-test.vercel.app/";
   return `${baseUrl}?p=${personalityType}&c=${careerCategory}`;
 };
 
@@ -265,36 +266,7 @@ const sendResultsByEmail = (email, results) => {
     console.log("EmailJS情報 - サービスID:", "service_geb6xap");
     console.log("EmailJS情報 - テンプレートID:", "template_x2a74sv");
 
-    // 結果URLを生成（ローカルストレージを使わない）
-    const resultUrl = generateResultUrl(results);
-    console.log("生成されたURL:", resultUrl);
-
-    // 診断結果のテキストを作成
-    const personalityType = results.personalityData.name;
-    const personalityDesc = results.personalityData.description;
-    const careerCategory = results.careerCategories[0].name;
-    const careerJobs = results.careerCategories[0].jobs.join("、");
-
-    // 値の長さをチェック（長すぎる場合は切り詰める）
-    const maxLength = 1000; // 最大文字数
-    const truncatedDesc =
-      personalityDesc.length > maxLength
-        ? personalityDesc.substring(0, maxLength) + "..."
-        : personalityDesc;
-
-    // EmailJSのテンプレートパラメータ
-    const templateParams = {
-      to_email: email,
-      personality_type: personalityType,
-      personality_description: truncatedDesc, // 切り詰めた説明文を使用
-      career_category: careerCategory,
-      career_jobs: careerJobs,
-      result_url: resultUrl,
-    };
-
-    console.log("送信するパラメータ:", JSON.stringify(templateParams, null, 2));
-
-    // EmailJSが初期化されているか確認
+    // EmailJSの初期化を確認
     if (typeof emailjs === "undefined") {
       console.error("EmailJSが読み込まれていません");
       alert(
@@ -303,39 +275,64 @@ const sendResultsByEmail = (email, results) => {
       return;
     }
 
-    // テスト用の簡易パラメータでまず試す
-    const testParams = {
+    // EmailJSの初期化（公開キーを設定）
+    emailjs.init("C2SQsPrfRcTmuDxwY");
+    console.log("EmailJSを初期化しました");
+
+    // 結果URLを生成（ローカルストレージを使わない）
+    const resultUrl = generateResultUrl(results);
+    console.log("生成されたURL:", resultUrl);
+
+    // 診断結果のテキストを作成（短く保つ）
+    const personalityType = results.personalityData.name;
+    // 説明文は短くする
+    const personalityDesc =
+      "あなたの性格タイプの特徴です。詳細はメール内のURLからご確認ください。";
+    const careerCategory = results.careerCategories[0].name;
+    // 職業リストも短くする
+    const careerJobs =
+      results.careerCategories[0].jobs.slice(0, 3).join("、") + "など";
+
+    // 非常に簡素化したテンプレートパラメータ
+    const templateParams = {
       to_email: email,
-      personality_type: "テスト性格タイプ",
-      personality_description: "これはテスト用の説明文です。",
-      career_category: "テスト職業カテゴリ",
-      career_jobs: "テスト職業1、テスト職業2",
+      personality_type: personalityType,
+      personality_description: personalityDesc,
+      career_category: careerCategory,
+      career_jobs: careerJobs,
       result_url: resultUrl,
     };
 
-    console.log("テスト用パラメータでメール送信を試みます...");
+    console.log("送信するパラメータ:", JSON.stringify(templateParams, null, 2));
 
-    // EmailJSを使用してメール送信（テスト用パラメータ）
+    // 直接シンプルなパラメータで送信
     emailjs
-      .send("service_geb6xap", "template_x2a74sv", testParams)
+      .send("service_geb6xap", "template_x2a74sv", templateParams)
       .then((response) => {
-        console.log("テストメール送信成功:", response);
-
-        // 本番パラメータでメール送信
-        console.log("本番パラメータでメール送信を試みます...");
-        return emailjs.send(
-          "service_geb6xap",
-          "template_x2a74sv",
-          templateParams
-        );
-      })
-      .then((response) => {
-        console.log("本番メール送信成功:", response);
+        console.log("メール送信成功:", response);
         alert("診断結果をメールで送信しました！");
       })
       .catch((error) => {
         console.error("メール送信エラー:", error);
+
+        // エラーの詳細情報を表示
+        if (error.text) {
+          console.error("エラー詳細:", error.text);
+        }
+
         alert("メール送信中にエラーが発生しました。もう一度お試しください。");
+
+        // 代替手段として結果URLをクリップボードにコピー
+        navigator.clipboard
+          .writeText(resultUrl)
+          .then(() => {
+            alert(
+              "結果URLをクリップボードにコピーしました。必要に応じて保存してください。"
+            );
+          })
+          .catch((err) => {
+            console.error("クリップボードへのコピーに失敗しました:", err);
+          });
       });
   } catch (error) {
     console.error("メール送信処理でエラーが発生しました:", error);
