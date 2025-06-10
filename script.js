@@ -22,7 +22,7 @@ const registrationForm = document.getElementById("registration-form");
 const emailInput = document.getElementById("email");
 
 // LINE友だち追加URL
-const LINE_FRIEND_URL = "https://line.me/R/ti/p/@908enhf"; // 実際のLINE公式アカウントのIDに変更してください
+const LINE_FRIEND_URL = "https://lin.ee/your_line_id"; // 実際のLINE公式アカウントのURLに変更する必要があります
 
 // 質問表示要素
 const questionNumber = document.getElementById("question-number");
@@ -98,11 +98,19 @@ const proceedToQuestions = (event) => {
 
 // LINE友だち追加
 const addLineFriend = () => {
-  // 新しいウィンドウでLINE友だち追加ページを開く
-  window.open(LINE_FRIEND_URL, "_blank");
+  try {
+    // LIFFが初期化されているか確認
+    if (liff.isInClient()) {
+      // LINEアプリ内で実行されている場合
+      liff.openWindow({
+        url: LINE_FRIEND_URL,
+        external: false,
+      });
+    } else {
+      // ブラウザで実行されている場合
+      window.open(LINE_FRIEND_URL, "_blank");
+    }
 
-  // 友だち追加後に結果画面に進む
-  setTimeout(() => {
     // 連絡先情報を保存（LINE経由）
     contactInfo = { line: "LINE経由" };
 
@@ -123,7 +131,31 @@ const addLineFriend = () => {
       // 結果画面を表示
       showScreen("result");
     }, 1500);
-  }, 500);
+  } catch (error) {
+    console.error("LINE連携エラー:", error);
+    alert("LINE連携中にエラーが発生しました。ブラウザで開いてみてください。");
+
+    // エラーが発生した場合でも結果画面に進む
+    contactInfo = { line: "LINE経由（エラー発生）" };
+
+    // ローディング画面を表示
+    showScreen("loading");
+
+    // 結果計算の処理時間をシミュレート
+    setTimeout(() => {
+      // 結果を計算
+      const results = generateResults(answers);
+
+      // 結果を表示
+      displayResults(results);
+
+      // 結果を保存
+      saveResults(contactInfo, results);
+
+      // 結果画面を表示
+      showScreen("result");
+    }, 1500);
+  }
 };
 
 // 次の質問に進む
@@ -274,10 +306,34 @@ const setupEventListeners = () => {
   buttons.restart.addEventListener("click", restartDiagnosis);
 };
 
+// LIFFの初期化
+const initLiff = async () => {
+  try {
+    // LIFFアプリのIDを設定（実際のLIFF IDに変更する必要があります）
+    const liffId = "your_liff_id";
+
+    // LIFFの初期化
+    await liff.init({ liffId });
+    console.log("LIFF initialized successfully");
+  } catch (error) {
+    console.error("LIFF initialization failed:", error);
+  }
+};
+
 // アプリケーションの初期化
 const initApp = () => {
+  // イベントリスナーの設定
   setupEventListeners();
+
+  // 開始画面を表示
   showScreen("start");
+
+  // LIFFの初期化
+  if (window.liff) {
+    initLiff();
+  } else {
+    console.warn("LIFF SDK is not loaded");
+  }
 };
 
 // DOMが読み込まれたら初期化
