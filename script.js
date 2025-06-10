@@ -14,7 +14,8 @@ const buttons = {
   start: document.getElementById("start-btn"),
   prev: document.getElementById("prev-btn"),
   restart: document.getElementById("restart-btn"),
-  lineAdd: document.getElementById("line-add-button"),
+  // LINE連携機能は一時的に無効化
+  // lineAdd: document.getElementById("line-add-button"),
 };
 
 // フォーム要素
@@ -288,8 +289,8 @@ const setupEventListeners = () => {
   // 登録フォーム送信
   registrationForm.addEventListener("submit", showResults);
 
-  // LINE友だち追加ボタン
-  buttons.lineAdd.addEventListener("click", addLineFriend);
+  // LINE友だち追加ボタン - 一時的に無効化
+  // buttons.lineAdd.addEventListener("click", addLineFriend);
 
   // 選択肢が選ばれたとき、自動的に次の質問へ
   optionInputs.forEach((input) => {
@@ -328,12 +329,12 @@ const initApp = () => {
   // 開始画面を表示
   showScreen("start");
 
-  // LIFFの初期化
-  if (window.liff) {
-    initLiff();
-  } else {
-    console.warn("LIFF SDK is not loaded");
-  }
+  // LIFFの初期化 - 一時的に無効化
+  // if (window.liff) {
+  //   initLiff();
+  // } else {
+  //   console.warn("LIFF SDK is not loaded");
+  // }
 };
 
 // DOMが読み込まれたら初期化

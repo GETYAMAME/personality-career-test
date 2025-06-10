@@ -68,7 +68,7 @@
 
       <div id="registration-screen" class="screen hidden">
         <h2>診断が完了しました</h2>
-        <p>診断結果を受け取るために、以下のいずれかを選択してください。</p>
+        <p>診断結果を受け取るために、メールアドレスを入力してください。</p>
         <form id="registration-form">
           <div class="form-group">
             <label for="email">メールアドレス</label>
@@ -84,19 +84,7 @@
               ✓ 個人情報は厳重に保護されます
             </p>
           </div>
-          <div class="line-container">
-            <p>または</p>
-            <div class="line-button-container">
-              <button type="button" id="line-add-button" class="line-add-btn">
-                <img
-                  src="https://scdn.line-apps.com/n/line_add_friends/btn/ja.png"
-                  alt="友だち追加"
-                  height="36"
-                />
-              </button>
-              <p class="line-note">LINEで友だち追加して結果を受け取る</p>
-            </div>
-          </div>
+          <!-- LINE連携機能は一時的に無効化 -->
           <button type="submit" class="btn">次へ進む</button>
         </form>
       </div>
