@@ -261,6 +261,9 @@ const generateResultUrl = (results) => {
 const sendResultsByEmail = (email, results) => {
   try {
     console.log("メール送信処理を開始します...");
+    console.log("EmailJS情報 - ユーザーID:", "C2SQsPrfRcTmuDxwY");
+    console.log("EmailJS情報 - サービスID:", "service_geb6xap");
+    console.log("EmailJS情報 - テンプレートID:", "template_x2a74sv");
 
     // 結果URLを生成（ローカルストレージを使わない）
     const resultUrl = generateResultUrl(results);
@@ -272,17 +275,24 @@ const sendResultsByEmail = (email, results) => {
     const careerCategory = results.careerCategories[0].name;
     const careerJobs = results.careerCategories[0].jobs.join("、");
 
+    // 値の長さをチェック（長すぎる場合は切り詰める）
+    const maxLength = 1000; // 最大文字数
+    const truncatedDesc =
+      personalityDesc.length > maxLength
+        ? personalityDesc.substring(0, maxLength) + "..."
+        : personalityDesc;
+
     // EmailJSのテンプレートパラメータ
     const templateParams = {
       to_email: email,
       personality_type: personalityType,
-      personality_description: personalityDesc,
+      personality_description: truncatedDesc, // 切り詰めた説明文を使用
       career_category: careerCategory,
       career_jobs: careerJobs,
       result_url: resultUrl,
     };
 
-    console.log("送信するパラメータ:", templateParams);
+    console.log("送信するパラメータ:", JSON.stringify(templateParams, null, 2));
 
     // EmailJSが初期化されているか確認
     if (typeof emailjs === "undefined") {
@@ -293,11 +303,34 @@ const sendResultsByEmail = (email, results) => {
       return;
     }
 
-    // EmailJSを使用してメール送信
+    // テスト用の簡易パラメータでまず試す
+    const testParams = {
+      to_email: email,
+      personality_type: "テスト性格タイプ",
+      personality_description: "これはテスト用の説明文です。",
+      career_category: "テスト職業カテゴリ",
+      career_jobs: "テスト職業1、テスト職業2",
+      result_url: resultUrl,
+    };
+
+    console.log("テスト用パラメータでメール送信を試みます...");
+
+    // EmailJSを使用してメール送信（テスト用パラメータ）
     emailjs
-      .send("service_geb6xap", "template_x2a74sv", templateParams)
+      .send("service_geb6xap", "template_x2a74sv", testParams)
       .then((response) => {
-        console.log("メール送信成功:", response);
+        console.log("テストメール送信成功:", response);
+
+        // 本番パラメータでメール送信
+        console.log("本番パラメータでメール送信を試みます...");
+        return emailjs.send(
+          "service_geb6xap",
+          "template_x2a74sv",
+          templateParams
+        );
+      })
+      .then((response) => {
+        console.log("本番メール送信成功:", response);
         alert("診断結果をメールで送信しました！");
       })
       .catch((error) => {
