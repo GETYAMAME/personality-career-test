@@ -599,8 +599,8 @@ input {
 
   /* 小さいスマートフォン表示時の画像サイズ調整 */
   .main-illustration {
-    max-width: 40%;
-    margin-bottom: 5px;
+    max-width: 50%;
+    margin-bottom: 10px;
   }
 
   .result-illustration {
