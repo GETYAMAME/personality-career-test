@@ -223,6 +223,17 @@ input {
   font-size: 1rem;
 }
 
+.email-benefits {
+  font-size: 0.9rem;
+  color: #5a5a5a;
+  margin-top: 10px;
+  background-color: #f8f9fa;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border-left: 3px solid #f8a5c2;
+  line-height: 1.6;
+}
+
 .note {
   font-size: 0.9rem;
   color: #7f8c8d;
