@@ -158,9 +158,34 @@ const generateResults = (answers) => {
 
 // 結果画面に診断結果を表示
 const displayResults = (results) => {
-  // 性格タイプの表示
-  document.getElementById("personality-type").textContent =
-    results.personalityData.name;
+  // 結果コンテナにアニメーションクラスを追加
+  document.querySelector(".result-container").classList.add("result-animation");
+
+  // 性格タイプの表示（派手なアニメーション付き）
+  const personalityTypeElement = document.getElementById("personality-type");
+  personalityTypeElement.textContent = results.personalityData.name;
+
+  // タイプ名を一文字ずつ表示するアニメーション効果
+  personalityTypeElement.innerHTML = results.personalityData.name
+    .split("")
+    .map((char) => `<span class="char">${char}</span>`)
+    .join("");
+
+  // 各文字に遅延アニメーションを適用
+  const chars = personalityTypeElement.querySelectorAll(".char");
+  chars.forEach((char, index) => {
+    char.style.display = "inline-block";
+    char.style.opacity = "0";
+    char.style.transform = "translateY(20px)";
+    char.style.transition = "all 0.3s ease";
+    char.style.transitionDelay = `${0.1 * index}s`;
+
+    setTimeout(() => {
+      char.style.opacity = "1";
+      char.style.transform = "translateY(0)";
+    }, 100);
+  });
+
   document.getElementById("personality-description").textContent =
     results.personalityData.description;
 
@@ -189,9 +214,12 @@ const displayResults = (results) => {
   personalityImage.src = imageUrl;
   personalityImage.alt = `${results.personalityData.name}のイラスト`;
 
-  // 適職の表示
+  // 適職の表示（派手なアニメーション付き）
   const careerMatchesElement = document.getElementById("career-matches");
   careerMatchesElement.innerHTML = "";
+
+  // 結果表示前の演出
+  document.getElementById("result-screen").classList.add("show-result");
 
   if (results.careerCategories.length > 0) {
     // 最もマッチする職業カテゴリーを表示
@@ -214,11 +242,65 @@ const displayResults = (results) => {
       }
     }
 
-    document.getElementById("career-description").innerHTML = careerDescription;
+    // 派手なアニメーション効果付きで表示
+    const careerDescElement = document.getElementById("career-description");
+    careerDescElement.innerHTML = careerDescription;
+
+    // 職業リストを順番に表示するアニメーション
+    const jobItems = careerDescElement.querySelectorAll("br");
+    jobItems.forEach((item, index) => {
+      const delay = 0.3 + index * 0.1;
+      item.style.display = "block";
+      item.style.opacity = "0";
+      item.style.transform = "translateX(-20px)";
+      item.style.transition = `all 0.5s ease ${delay}s`;
+
+      setTimeout(() => {
+        item.style.opacity = "1";
+        item.style.transform = "translateX(0)";
+      }, delay * 1000);
+    });
+
+    // 結果ボックスにキラキラエフェクトを追加
+    setTimeout(() => {
+      const resultBoxes = document.querySelectorAll(".result-box");
+      resultBoxes.forEach((box) => {
+        box.style.position = "relative";
+        box.style.overflow = "hidden";
+
+        // キラキラエフェクト要素を作成
+        const sparkle = document.createElement("div");
+        sparkle.style.position = "absolute";
+        sparkle.style.top = "0";
+        sparkle.style.left = "-100%";
+        sparkle.style.width = "100%";
+        sparkle.style.height = "100%";
+        sparkle.style.background =
+          "linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent)";
+        sparkle.style.animation = "sparkle 2s linear infinite";
+
+        // キラキラアニメーションのキーフレーム
+        const style = document.createElement("style");
+        style.textContent = `
+          @keyframes sparkle {
+            0% { left: -100%; }
+            100% { left: 100%; }
+          }
+        `;
+        document.head.appendChild(style);
+
+        box.appendChild(sparkle);
+      });
+    }, 1000);
   } else {
     document.getElementById("career-description").textContent =
       "適職カテゴリーが見つかりませんでした。";
   }
+
+  // 画像が読み込まれたら拡大アニメーションを適用
+  personalityImage.onload = function () {
+    this.style.animation = "scaleIn 0.8s ease forwards";
+  };
 };
 
 // 結果データをローカルストレージに保存（オプション）

@@ -345,6 +345,27 @@ input {
   transition: all 0.3s ease;
 }
 
+/* 端に行くほど大きくなるラジオボタン */
+.option:nth-child(1) .radio-btn {
+  width: 50px;
+  height: 50px;
+}
+
+.option:nth-child(2) .radio-btn {
+  width: 45px;
+  height: 45px;
+}
+
+.option:nth-child(4) .radio-btn {
+  width: 45px;
+  height: 45px;
+}
+
+.option:nth-child(5) .radio-btn {
+  width: 50px;
+  height: 50px;
+}
+
 .option:nth-child(1) .radio-btn,
 .option:nth-child(2) .radio-btn {
   border-color: #c56cf0;
@@ -413,6 +434,61 @@ input {
   margin: 20px 0;
 }
 
+/* 診断結果表示アニメーション */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    box-shadow: 0 0 5px rgba(248, 165, 194, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(248, 165, 194, 0.7);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(248, 165, 194, 0.3);
+  }
+}
+
+.result-animation {
+  animation: fadeInUp 0.8s ease forwards;
+}
+
+.personality-result {
+  animation: scaleIn 0.8s ease 0.3s both;
+}
+
+.career-result {
+  animation: scaleIn 0.8s ease 0.6s both;
+}
+
+.result-box {
+  animation: shimmer 2s infinite;
+}
+
+.result-illustration {
+  animation: scaleIn 1s ease 0.5s both;
+}
+
 .personality-result,
 .career-result {
   background-color: #f8f9fa;
@@ -465,6 +541,27 @@ input {
   .radio-btn {
     width: 30px;
     height: 30px;
+  }
+
+  /* レスポンシブ対応：端に行くほど大きくなるラジオボタン */
+  .option:nth-child(1) .radio-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .option:nth-child(2) .radio-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .option:nth-child(4) .radio-btn {
+    width: 35px;
+    height: 35px;
+  }
+
+  .option:nth-child(5) .radio-btn {
+    width: 40px;
+    height: 40px;
   }
 
   .options-labels {
