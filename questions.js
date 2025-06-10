@@ -98,31 +98,49 @@ const personalityTypes = {
     name: "知的リーダータイプ",
     description:
       "頭の回転が速く、周りを自然とリードするタイプ✨ 物事を論理的に考え、効率よく目標達成に向かうのが得意です。友達からは「頼りになる」と言われることが多く、グループの中心的存在になりがち。計画性があり、みんなを上手に巻き込んで楽しい時間を作り出せる才能があります。",
-    traits: ["analytical", "leadership", "data_driven", "directness"],
+    traits: [
+      "analytical",
+      "leadership",
+      "data_driven",
+      "directness",
+      "planning",
+    ],
   },
   creative_innovator: {
     name: "クリエイティブ発想タイプ",
     description:
       "豊かな発想力と好奇心を持つ、アイデアの泉のような存在✨ 「こんなことできたらいいな」を形にするのが得意で、周りに新しい風を運んできます。マンネリを嫌い、常に新しいことにチャレンジしたい気持ちがあります。SNSでトレンドをいち早くキャッチし、友達に紹介するのも楽しみの一つ。",
-    traits: ["creativity", "flexibility", "tech_adoption"],
+    traits: [
+      "creativity",
+      "tech_adoption",
+      "assertiveness",
+      "flexibility",
+      "pressure",
+    ],
   },
   empathetic_collaborator: {
     name: "共感力の高いサポーター",
     description:
       "人の気持ちに寄り添える、優しさと温かさを持つタイプ✨ 友達の小さな変化にも気づき、「どうしたの？」と声をかけられる繊細さを持っています。聞き上手で、周りからは相談相手として頼られることが多いでしょう。人間関係を大切にし、みんなが心地よく過ごせる空間づくりが得意です。",
-    traits: ["empathy", "flexibility", "introversion"],
+    traits: ["empathy", "introversion", "detail", "focus", "independence"],
   },
   detail_oriented_specialist: {
     name: "丁寧な完璧主義者",
     description:
       "細部まで気を配る、几帳面で信頼感のあるタイプ✨ 「ざっくり」よりも「きっちり」が好きで、何事も妥協せず最後までやり遂げる粘り強さがあります。計画を立てるのが得意で、旅行の幹事を任されることも多いはず。約束はしっかり守り、友達からは「頼むと必ず期待以上にやってくれる」と信頼されています。",
-    traits: ["detail", "planning", "focus", "independence"],
+    traits: ["detail", "planning", "focus", "independence", "data_driven"],
   },
   adaptable_problem_solver: {
     name: "臨機応変なトラブルシューター",
     description:
       "どんな状況でも柔軟に対応できる、頼れる問題解決タイプ✨ 予定変更があっても「なんとかなるよ！」とポジティブに切り替えられます。友達が困っているとき、すぐに実用的なアドバイスができるので、周りからは「いざというとき頼りになる」と思われています。新しいことを学ぶのが早く、トレンドにもすぐ適応できる順応性の高さが魅力です。",
-    traits: ["flexibility", "pressure", "tech_adoption", "analytical"],
+    traits: [
+      "flexibility",
+      "pressure",
+      "tech_adoption",
+      "creativity",
+      "empathy",
+    ],
   },
 };
 

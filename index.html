@@ -5,14 +5,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>性格・適職診断テスト</title>
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+    />
   </head>
   <body>
+    <header class="site-header">
+      <div class="header-container">
+        <h1 class="site-title">キャリア診断</h1>
+      </div>
+    </header>
     <div class="container">
       <div id="start-screen" class="screen">
         <h1>性格・適職診断テスト</h1>
         <div class="illustration-container">
           <img
-            src="images/main-illustration.png"
+            src="https://0go8j1roigqby3ss.public.blob.vercel-storage.com/main-illustration-oZDtTknwe2g2599LkiO5gANl2e16GZ.png"
             alt="ふんわり系女性イラスト"
             class="main-illustration"
           />
@@ -107,7 +120,8 @@
             <div id="personality-type" class="result-box"></div>
             <div class="illustration-container">
               <img
-                src="images/personality-illustration.png"
+                id="personality-image"
+                src=""
                 alt="性格タイプイラスト"
                 class="result-illustration"
               />
@@ -117,19 +131,19 @@
           <div class="career-result">
             <h3>あなたに適した職業</h3>
             <div id="career-matches" class="result-box"></div>
-            <div class="illustration-container">
-              <img
-                src="images/career-illustration.png"
-                alt="職業イラスト"
-                class="result-illustration"
-              />
-            </div>
             <div id="career-description"></div>
           </div>
         </div>
         <button id="restart-btn" class="btn">もう一度診断する</button>
       </div>
     </div>
+
+    <footer class="site-footer">
+      <div class="footer-container">
+        <p class="footer-text">あなたの可能性を広げる性格・適職診断</p>
+        <p class="copyright">&copy; 2025 キャリア診断</p>
+      </div>
+    </footer>
 
     <script src="questions.js"></script>
     <script src="results.js"></script>

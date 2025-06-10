@@ -42,25 +42,60 @@ const calculateTraitScores = (answers) => {
 const determinePersonalityType = (traitScores) => {
   // 各性格タイプの合計スコアを計算
   const typeScores = {};
+  const typeMatches = {};
 
   Object.keys(personalityTypes).forEach((typeKey) => {
     const type = personalityTypes[typeKey];
+
     // この性格タイプに関連する特性のスコアを合計
-    typeScores[typeKey] = type.traits.reduce((sum, trait) => {
-      return sum + (traitScores[trait] || 0);
-    }, 0);
+    let totalScore = 0;
+    let matchCount = 0;
+
+    // 各特性について、スコアが3以上（「どちらでもない」以上）なら一致とみなす
+    type.traits.forEach((trait) => {
+      const score = traitScores[trait] || 0;
+      totalScore += score;
+      if (score >= 3) {
+        matchCount++;
+      }
+    });
+
+    // 特性の一致率を計算（0〜1の範囲）
+    const matchRate = matchCount / type.traits.length;
+
+    // 合計スコアと一致率を保存
+    typeScores[typeKey] = totalScore;
+    typeMatches[typeKey] = matchRate;
+  });
+
+  // スコアと一致率を組み合わせて最終スコアを計算
+  const finalScores = {};
+  Object.keys(typeScores).forEach((typeKey) => {
+    // 一致率に重みを付けて最終スコアを計算
+    finalScores[typeKey] =
+      typeScores[typeKey] * (0.7 + typeMatches[typeKey] * 0.3);
   });
 
   // 最高スコアの性格タイプを見つける
   let highestScore = 0;
   let highestType = null;
 
-  Object.keys(typeScores).forEach((typeKey) => {
-    if (typeScores[typeKey] > highestScore) {
-      highestScore = typeScores[typeKey];
+  Object.keys(finalScores).forEach((typeKey) => {
+    if (finalScores[typeKey] > highestScore) {
+      highestScore = finalScores[typeKey];
       highestType = typeKey;
     }
   });
+
+  // 同点の場合はランダムに選択
+  const tiedTypes = Object.keys(finalScores).filter(
+    (typeKey) => Math.abs(finalScores[typeKey] - highestScore) < 0.001
+  );
+
+  if (tiedTypes.length > 1) {
+    const randomIndex = Math.floor(Math.random() * tiedTypes.length);
+    highestType = tiedTypes[randomIndex];
+  }
 
   return highestType;
 };
@@ -130,11 +165,28 @@ const displayResults = (results) => {
     results.personalityData.description;
 
   // 性格タイプに応じた画像を表示
-  const personalityImage = document.querySelector(
-    ".personality-result .result-illustration"
-  );
+  const personalityImage = document.getElementById("personality-image");
   const personalityType = results.personalityType;
-  personalityImage.src = `images/${personalityType}.png`;
+
+  // Vercel Storageの画像URLマッピング
+  const imageUrls = {
+    analytical_leader:
+      "https://0go8j1roigqby3ss.public.blob.vercel-storage.com/analytical_leader-5s542fcs4k7mVKoYRQ1PfalWGS36i2.png",
+    creative_innovator:
+      "https://0go8j1roigqby3ss.public.blob.vercel-storage.com/creative_innovator-rIfasCiKeZxkozSN9C7Tknt644xizC.png",
+    empathetic_collaborator:
+      "https://0go8j1roigqby3ss.public.blob.vercel-storage.com/empathetic_collaborator-J5wkYOxXjmmdIPMzqtqR9dipBktsf7.png",
+    detail_oriented_specialist:
+      "https://0go8j1roigqby3ss.public.blob.vercel-storage.com/detail_oriented_specialist-eYetzDXQzlOEatEjzvn3uyxahBCp9L.png",
+    adaptable_problem_solver:
+      "https://0go8j1roigqby3ss.public.blob.vercel-storage.com/%20adaptable_problem_solver-IA8MfH1p0KoAybAqDw20RolJQPWuh6.png",
+  };
+
+  // 対応するVercel Storage画像URLを取得
+  const imageUrl = imageUrls[personalityType] || imageUrls.analytical_leader; // デフォルトは知的リーダータイプ
+
+  // 画像URLを設定
+  personalityImage.src = imageUrl;
   personalityImage.alt = `${results.personalityData.name}のイラスト`;
 
   // 適職の表示
@@ -146,12 +198,7 @@ const displayResults = (results) => {
     const topCategory = results.careerCategories[0];
     careerMatchesElement.textContent = topCategory.name;
 
-    // 職業カテゴリーに応じた画像を表示
-    const careerImage = document.querySelector(
-      ".career-result .result-illustration"
-    );
-    careerImage.src = `images/${topCategory.key}.png`;
-    careerImage.alt = `${topCategory.name}のイラスト`;
+    // 職業カテゴリーの画像表示は不要
 
     // 職業の詳細説明
     let careerDescription = `${topCategory.description}<br><br>`;
