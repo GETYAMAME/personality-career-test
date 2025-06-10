@@ -246,8 +246,22 @@ const showResults = (event) => {
   }, 1500);
 };
 
+// 結果URLを生成する関数
+const generateResultUrl = (results) => {
+  // 結果データをURLパラメータに含める
+  const personalityType = results.personalityType; // personalityTypeはキー名
+  const careerCategory = results.careerCategories[0].key; // careerCategoriesの最初の要素のkey
+
+  // URLパラメータに必要最小限の情報を含める
+  const baseUrl = window.location.href.split("?")[0];
+  return `${baseUrl}?p=${personalityType}&c=${careerCategory}`;
+};
+
 // メールで診断結果を送信する
 const sendResultsByEmail = (email, results) => {
+  // 結果URLを生成（ローカルストレージを使わない）
+  const resultUrl = generateResultUrl(results);
+
   // 診断結果のテキストを作成
   const personalityType = results.personalityData.name;
   const personalityDesc = results.personalityData.description;
@@ -261,6 +275,7 @@ const sendResultsByEmail = (email, results) => {
     personality_description: personalityDesc,
     career_category: careerCategory,
     career_jobs: careerJobs,
+    result_url: resultUrl,
   };
 
   // EmailJSを使用してメール送信
@@ -320,13 +335,65 @@ const initLiff = async () => {
   }
 };
 
+// URLからパラメータを取得する関数
+const getResultParamsFromUrl = () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  return {
+    personalityType: urlParams.get("p"),
+    careerCategory: urlParams.get("c"),
+  };
+};
+
+// パラメータから結果を再構築する関数
+const reconstructResultsFromParams = (params) => {
+  if (!params.personalityType || !params.careerCategory) return null;
+
+  // personalityDataを取得（personalityTypesはオブジェクト）
+  const personalityData = personalityTypes[params.personalityType];
+  if (!personalityData) return null;
+
+  // careerCategoriesを取得（careerCategoriesはオブジェクト）
+  const careerCategory = careerCategories[params.careerCategory];
+  if (!careerCategory) return null;
+
+  // キーを追加
+  const careerCategoryWithKey = {
+    ...careerCategory,
+    key: params.careerCategory,
+  };
+
+  // 結果オブジェクトを再構築
+  return {
+    personalityType: params.personalityType,
+    personalityData: personalityData,
+    careerCategories: [careerCategoryWithKey],
+  };
+};
+
 // アプリケーションの初期化
 const initApp = () => {
   // イベントリスナーの設定
   setupEventListeners();
 
-  // 開始画面を表示
-  showScreen("start");
+  // URLからパラメータを取得
+  const params = getResultParamsFromUrl();
+
+  // パラメータがある場合は結果を再構築して表示
+  if (params.personalityType && params.careerCategory) {
+    const reconstructedResults = reconstructResultsFromParams(params);
+    if (reconstructedResults) {
+      // 結果を表示
+      displayResults(reconstructedResults);
+      // 結果画面を表示
+      showScreen("result");
+    } else {
+      // 結果の再構築に失敗した場合は開始画面を表示
+      showScreen("start");
+    }
+  } else {
+    // パラメータがない場合は開始画面を表示
+    showScreen("start");
+  }
 
   // LIFFの初期化 - 一時的に無効化
   // if (window.liff) {
