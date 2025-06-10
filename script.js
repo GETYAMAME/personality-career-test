@@ -259,34 +259,55 @@ const generateResultUrl = (results) => {
 
 // メールで診断結果を送信する
 const sendResultsByEmail = (email, results) => {
-  // 結果URLを生成（ローカルストレージを使わない）
-  const resultUrl = generateResultUrl(results);
+  try {
+    console.log("メール送信処理を開始します...");
 
-  // 診断結果のテキストを作成
-  const personalityType = results.personalityData.name;
-  const personalityDesc = results.personalityData.description;
-  const careerCategory = results.careerCategories[0].name;
-  const careerJobs = results.careerCategories[0].jobs.join("、");
+    // 結果URLを生成（ローカルストレージを使わない）
+    const resultUrl = generateResultUrl(results);
+    console.log("生成されたURL:", resultUrl);
 
-  // EmailJSのテンプレートパラメータ
-  const templateParams = {
-    to_email: email,
-    personality_type: personalityType,
-    personality_description: personalityDesc,
-    career_category: careerCategory,
-    career_jobs: careerJobs,
-    result_url: resultUrl,
-  };
+    // 診断結果のテキストを作成
+    const personalityType = results.personalityData.name;
+    const personalityDesc = results.personalityData.description;
+    const careerCategory = results.careerCategories[0].name;
+    const careerJobs = results.careerCategories[0].jobs.join("、");
 
-  // EmailJSを使用してメール送信
-  emailjs
-    .send("service_geb6xap", "template_x2a74sv", templateParams)
-    .then((response) => {
-      console.log("メール送信成功:", response);
-    })
-    .catch((error) => {
-      console.error("メール送信エラー:", error);
-    });
+    // EmailJSのテンプレートパラメータ
+    const templateParams = {
+      to_email: email,
+      personality_type: personalityType,
+      personality_description: personalityDesc,
+      career_category: careerCategory,
+      career_jobs: careerJobs,
+      result_url: resultUrl,
+    };
+
+    console.log("送信するパラメータ:", templateParams);
+
+    // EmailJSが初期化されているか確認
+    if (typeof emailjs === "undefined") {
+      console.error("EmailJSが読み込まれていません");
+      alert(
+        "メール送信機能が正しく初期化されていません。ページを再読み込みしてください。"
+      );
+      return;
+    }
+
+    // EmailJSを使用してメール送信
+    emailjs
+      .send("service_geb6xap", "template_x2a74sv", templateParams)
+      .then((response) => {
+        console.log("メール送信成功:", response);
+        alert("診断結果をメールで送信しました！");
+      })
+      .catch((error) => {
+        console.error("メール送信エラー:", error);
+        alert("メール送信中にエラーが発生しました。もう一度お試しください。");
+      });
+  } catch (error) {
+    console.error("メール送信処理でエラーが発生しました:", error);
+    alert("メール送信処理でエラーが発生しました。もう一度お試しください。");
+  }
 };
 
 // 診断をリスタートする
